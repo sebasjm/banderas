@@ -1,0 +1,26 @@
+{
+    "short_name": "World Flags",
+    "name": "World Flags",
+    "icons": [{
+        "src": "/static/images/launcher-icon-1x.png",
+        "type": "image/png",
+        "sizes": "48x48"
+    },{
+        "src": "/static/images/launcher-icon-2x.png",
+        "type": "image/png",
+        "sizes": "96x96"
+    },{
+        "src": "/static/images/launcher-icon-4x.png",
+        "type": "image/png",
+        "sizes": "192x192"
+    },{
+        "src": "/static/images/launcher-icon-8x.png",
+        "type": "image/png",
+        "sizes": "384x384"
+    }],
+    "background_color": "#2196F3",
+    "theme_color": "#2196F3",
+    "display": "standalone",
+    "orientation": "portrait",
+    "start_url": "/?launcher=true"
+  }

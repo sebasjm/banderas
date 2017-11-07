@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Head from 'next/head'
 import Router from 'next/router'
 import fetch from 'isomorphic-unfetch'
 
@@ -33,6 +34,15 @@ const defaultOptions = {
 
 const Page = ({country, options, regions}) => (!country || !options) ? <div> waiting ... </div> :
     <div>
+        <Head>
+            <title>Banderas</title>
+            <link key="1" rel="manifest" href="/static/manifest.json" />
+            <link key="2" rel="apple-touch-icon" sizes="180x180" href="/static/images/apple-touch-icon.png" />
+            <link key="3" rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon-32x32.png" />
+            <link key="4" rel="icon" type="image/png" sizes="16x16" href="/static/images/favicon-16x16.png" />
+            <meta key="5" name="msapplication-TileColor" content="#603cba" />
+            <meta key="6" name="theme-color" content="#2196F3" />
+        </Head>
         <flag>
             <img src={`/static/flags/${country.alpha3Code}.svg`} />
         </flag>
