@@ -3,10 +3,15 @@ import Head from 'next/head'
 import Router from 'next/router'
 import fetch from 'isomorphic-unfetch'
 
+const asHashMap = (array, key = (x) => x, value = (prev, x) => true) => array.reduce( (prev,x) => ({...prev, [key(x)]: value(prev, x) }), {})
+
 const alphabet = Array.from(
     {length: 26}, 
     (x,i) => String.fromCharCode(97 + i)
 )
+
+const alphabetMap = asHashMap(alphabet)
+
 const dict = Array.from({length:10}, (x,i) => i).concat(alphabet).concat(alphabet.map(x => x.toUpperCase()))
 
 const codeHash = (num) => 
@@ -51,7 +56,7 @@ const Page = ({country, options, regions}) => (!country || !options) ? <div> wai
                 {countryName(country, options.lang).split(' ').map( (word,i) => <word key={i}>
                     {word.split('').map( (c, i) => 
                         <character key={i}>{
-                            !options[`press_${c}`] ? '_' : c
+                            !options[`press_${c}`] && alphabetMap[c] ? '_' : c
                         }</character>
                     )}
                 </word> )}
@@ -202,8 +207,7 @@ const calculateGameState = (allCountries, options, redirect) => {
     const keyPressedMap = asHashMap( keyPressed(options) )
     const countryHasBeenFound = countryName(country, options.lang)
         .split('')
-        .filter( l => l !== ' ' )
-        .filter( l => !keyPressedMap[l] )
+        .filter( l => !keyPressedMap[l] && alphabetMap[l] )
         .length === 0
 
     if (countryHasBeenFound) {
@@ -270,8 +274,6 @@ const objectAsQueryString = obj => Object.keys(obj).reduce( (prev, k) => `${prev
 const toSimpleCase = (string) => string.normalize('NFD').replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase()
 
 const mapObject = (obj, func) => Object.keys(obj).reduce( (prev, x) => ({...prev, [x]: func(x, obj[x])}),{})
-
-const asHashMap = (array, key = (x) => x, value = (prev, x) => true) => array.reduce( (prev,x) => ({...prev, [key(x)]: value(prev, x) }), {})
 
 const randomNumber = (seed) => {
     const x = Math.sin(seed) * 10000;
