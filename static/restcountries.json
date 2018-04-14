@@ -2106,7 +2106,7 @@
       12.15,
       -68.266667
     ],
-    "name": "Bonaire, Sint Eustatius and Saba",
+    "name": "Caribbean Netherlands",
     "nativeName": "Bonaire",
     "numericCode": "535",
     "population": 17408,
@@ -2126,6 +2126,7 @@
       "fa": "بونیر",
       "fr": "Bonaire, Saint-Eustache et Saba",
       "it": "Bonaire, Saint-Eustache e Saba",
+      "es": "Caribe Neerlandés",
       "pt": "Bonaire"
     }
   },
@@ -4632,6 +4633,7 @@
     "translations": {
       "br": "Curaçao",
       "de": "Curaçao",
+      "es": "Curazao",
       "fa": "کوراسائو",
       "fr": "Curaçao",
       "it": "Curaçao",
@@ -15614,6 +15616,7 @@
       "br": "Sint Maarten",
       "de": "Sint Maarten (niederl. Teil)",
       "fa": "سینت مارتن",
+      "es": "Sint Maarten",
       "fr": "Saint Martin (partie néerlandaise)",
       "it": "Saint Martin (parte olandese)",
       "nl": "Sint Maarten",
