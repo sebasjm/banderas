@@ -31,11 +31,11 @@ const codeHash = (num) => {
 }
 */
 
-const defaultOptions = {
+const defaultOptions = () => ({
     lang: 'es',
     seed: codeHash(new Date()),
     size: 20
-}
+})
 
 const Page = ({country, options, regions}) => (!country || !options) ? <div> waiting ... </div> :
     <div>
@@ -148,7 +148,7 @@ const Page = ({country, options, regions}) => (!country || !options) ? <div> wai
 
 Page.getInitialProps = ({req, res, query}) => {
     const baseUrl = req ? `${req.protocol || 'http'}://${req.headers.host}` : ''
-    const options = {...defaultOptions, ...query}
+    const options = {...defaultOptions(), ...query}
     const redirect = isomorphicRedirect(res)
     
     return fetch(`${baseUrl}/static/restcountries.json`)
