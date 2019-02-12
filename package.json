@@ -6,11 +6,12 @@
     "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
-    "isomorphic-unfetch": "2.0.0",
-    "next": "5.0.0",
-    "next-offline": "2.4.0",
-    "react": "16.2.0",
+    "@zeit/next-css": "^1.0.1",
     "deep-extend": "0.5.1",
-    "react-dom": "16.6.1"
+    "isomorphic-unfetch": "2.0.0",
+    "next": "^8.0.0",
+    "next-offline": "2.4.0",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1"
   }
 }
