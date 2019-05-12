@@ -53,7 +53,7 @@ const Page = ({country, options, regions}) => (!country || !options) ? <div> wai
         </flag>
         <letters>
             <div>
-                {countryName(country, options.lang).split(' ').map( (word,i) => <word key={i}>
+                {countryGuess(country, options.guess, options.lang).split(' ').map( (word,i) => <word key={i}>
                     {word.split('').map( (c, i) => 
                         <character key={i}>{
                             !options[`press_${c}`] && alphabetMap[c] ? '_' : c
@@ -182,7 +182,8 @@ const isomorphicRedirect = res => ({ pathname, query = {} }) => {
 // GAME
 
 const calculateGameState = (allCountries, options, redirect) => {
-    const sortedCountries = randomize(allCountries, hashCode(options.seed) )
+    const section = options.section ? allCountries.filter( c => c.region === options.section || c.subregion === options.section) : allCountries
+    const sortedCountries = randomize(section, hashCode(options.seed) )
     const countries = options.size ? sortedCountries.slice(0, options.size) : sortedCountries
     
     const countriesFoundMap = asHashMap( countriesFound(options) )
@@ -205,7 +206,7 @@ const calculateGameState = (allCountries, options, redirect) => {
     }
 
     const keyPressedMap = asHashMap( keyPressed(options) )
-    const countryHasBeenFound = countryName(country, options.lang)
+    const countryHasBeenFound = countryGuess(country, options.guess, options.lang)
         .split('')
         .filter( l => !keyPressedMap[l] && alphabetMap[l] )
         .length === 0
@@ -245,10 +246,12 @@ const optionsAfterReload = (options) => ({
     size: options.size,
     seed: options.seed,
     region: options.region,
+    guess: options.guess,
+    section: options.section,
     ...asHashMap(Object.keys(options).filter(k => /^found_/.test(k)))
 })
 
-const countryName = (country, lang) => toSimpleCase(country.translations[lang] || country.name)
+const countryGuess = (country, property, lang) => toSimpleCase(country[property] || country.translations[lang] || country.name)
 
 const subregionsGroupByRegion = (countries) => asHashMap(
     countries, 
