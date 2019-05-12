@@ -19,17 +19,6 @@ const codeHash = (num) =>
         {length: Math.floor(Math.log(num) / Math.log(dict.length) + 0.00000000000001)+1}, 
         (x,i) => dict[Math.floor(num / dict.length**i) % dict.length]
     ).join('')
-/*
-const codeHash = (num) => {
-    const h = []
-    let i = num
-    while (i > 0) {
-        h.push(dict[i % dict.length])
-        i = Math.floor(i / dict.length) 
-    }
-    return h.join('')
-}
-*/
 
 const defaultOptions = () => ({
     lang: 'es',
@@ -294,23 +283,6 @@ const randomize = (array, seed) => {
     const position = Math.floor(randomNumber( seed ) * array.length)
     return randomize( splice(array, position), seed+1 ).concat( array[position] )
 }
-/*
-const randomize = (array, seed) => {
-    let updatableSeed = hashCode(seed)
-    return array.sort( () => {
-        const x = Math.sin(updatableSeed++) * 10000;
-        return .5 - x - Math.floor(x);
-    } )
-}
-*/
 
 const hashCode = string => string.split('').reduce( (prev,x) => (prev << 5) - prev + x.charCodeAt(0) | 0,0)
-/*
-const hashCode = string => {
-    let h = 0, i = 0;
-    while (i < string.length)
-        h = (h << 5) - h + string.charCodeAt(i++) | 0;
-    return h;
-};
-*/
 
